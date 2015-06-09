@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google" value="notranslate">
+
+	<title>Plainspoken</title>
+	
+	<!-- (the version without the -lite suffix includes Bootstrap v3+) -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootcards-ios-lite.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+</head>
+	
+<body>
+	<div class="body">
+		<div id="notification"></div>
+		<nav class="navmenu">
+			<ul class="nav">
+				<li><a href="#/home">Home</a></li>
+				<li><a href="#/top-stories">Top stories</a></li>
+				<li><a href="#/bookmarks">Bookmarks</a></li>
+				<li><a href="#/search">Search</a></li>
+				<li><a href="#/profile">Profile</a></li>
+				<li><a href="#/help">Help</a></li>
+				<li><a href="#/sign-out">Sign out</a></li>
+			</ul>
+		</nav>
+		
+		<div id="pages"></div>
+	</div>
+	<div id="templates" style="display: none;">
+		<div class="page_template">
+			<div id="page-{{= page_num }}" class="page" style="height: {{= height }}px">
+				<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+					<div class="container">
+						{{ if (prev) { }}
+							<button type="button" class="btn btn-default" onclick="window.history.back()">
+								<i class="fa fa-angle-left" style="font-size: 1.75em; margin-top: 8px; padding-right: 25px;"></i>
+							</button>
+						{{ } }}
+						<a class="navbar-brand" title="Bootcards Starter" href="/">Plainspoken</a>	
+						<button type="button" class="btn btn-default btn-menu navbar-right">
+							<i class="fa fa-align-justify" style="font-size: 1.1em; margin-top: 15px;"></i>
+						</button>
+					</div>
+				</div>	
+				<div class="content container bootcards-container push-right">{{= content }}</div>
+			</div>
+		</div>
+		
+		<div class="article">
+			<div class="bootcards-cards">
+				<div class="panel panel-default bootcards-richtext al">
+					<div class="panel-heading ">
+						<!--
+						<h3>(i) Name of Block</h3>
+						<p>{{= author }} * {{= date }}</p>
+						-->
+					</div>
+					<div class="panel-body">
+						<h1 class="center">{{= title }}</h1>
+						<h3 class="i">{{= sub_title }}</h3>
+
+						<img src="img/{{= id }}.jpg" width="100%" />
+
+						<p>{{= text }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="home">
+			<div class="bootcards-list">
+				<div class="list-group">
+					{{ _.each(articles, function(a) { }}
+					<a class="list-group-item" href="#/article/{{= a.id }}">
+						<img src="img/{{= a.id }}.jpg" class="pull-left">
+						<h4 class="list-group-item-heading">{{= a.title }}</h4>
+						<p class="list-group-item-text">{{= a.sub_title.trunc(35, true) }}</p>
+						
+						<!--<h4 class="list-group-item-heading">{{= a.title }}</h4>-->
+					</a>
+					{{ }); }}
+				</div>
+			</div>
+		</div>
+		
+		<div class="bookmarks">
+			<div class="bootcards-cards">
+				<div class="panel panel-default bootcards-richtext al">
+					<div class="panel-heading ">
+						<h3>Bookmarks</h3>
+					</div>
+					<div class="panel-body">
+						<p>List of bookmarks here</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="search">
+			<div class="bootcards-cards">
+				<div class="panel panel-default bootcards-richtext al">
+					<div class="panel-heading ">
+						<h3>Search</h3>
+					</div>
+					<div class="panel-body">
+						<p>Search for articles</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="profile">
+			<div class="bootcards-cards">
+				<div class="panel panel-default bootcards-richtext al">
+					<div class="panel-heading ">
+						<h3>Profile</h3>
+					</div>
+					<div class="panel-body">
+						<p>Hey there user</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="help">
+			<div class="bootcards-cards">
+				<div class="panel panel-default bootcards-richtext al">
+					<div class="panel-heading ">
+						<h3>Help</h3>
+					</div>
+					<div class="panel-body">
+						<p>blah</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="sign-out">
+			<div class="bootcards-cards">
+				<div class="panel panel-default bootcards-richtext al">
+					<div class="panel-heading ">
+						<h3>Sign Out</h3>
+					</div>
+					<div class="panel-body">
+						<p>goodbye!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- end templates -->
+
+	<script src="cordova.js"></script>
+
+	<script src="js_prod/lib.jquery.js"></script>
+	<script src="js_prod/lib.bootstrap.min.js"></script>
+	<script src="js_prod/lib.bootcards.js"></script>
+	<script src="js_prod/lib.fastclick.min.js"></script>
+	<script src="js_prod/lib.underscore.min.js"></script>
+	<script src="js_prod/lib.backbone.min.js"></script>
+	<script src="js_prod/lib.hammer.min.js"></script>
+	<script src="js_prod/lib.backbone.hammer.js"></script>
+	<script src="js_prod/lib.behave.js"></script>
+	<script src="js_prod/lib.move.js"></script>
+	
+	<script type="text/javascript">
+		window.app = {
+			helpers		: {},
+			plugins		: {},
+			stub		: {},
+			model		: {},
+			views		: {},
+			data		: [],
+			setup: function () {
+				_.extend(app, Backbone.Events);
+				app.collection		= new Base_Collection();
+				app.router			= new Base_Router();
+				app.base			= new Base_View({ el: 'body' });
+
+				Backbone.history.start();
+			}
+		};
+		
+		if (!window.cordova) {
+			$(function(){ app.setup(); });
+		}
+		
+		window.onerror = function(message, url, lineNumber) {
+			alert(message + ' - ' + url + ' - ' + lineNumber);
+			console.log(message, url, lineNumber);
+			return true; // prevents browser error messages
+		};
+	</script>
+
+	<script src="js_prod/app.plugins.fetch.js"></script>
+	<script src="js_prod/app.plugins.move.js"></script>
+	<script src="js_prod/app.plugins.msg.js"></script>
+	<script src="js_prod/app.plugins.push_notifications.js"></script>
+	<script src="js_prod/app.plugins.utils.js"></script>
+
+	<script src="data.json"></script>
+	<script src="js/app.model.article.js"></script>
+	<script src="js_prod/app.collection.js"></script>
+
+	<script src="js_prod/app.views._base.js"></script>
+	<script src="js_prod/app.base.view.js"></script>
+	<script src="js_prod/app.base.router.js"></script>
+	<script src="js/app.base.config.js"></script>
+	
+	<script src="js/app.view.home.js"></script>
+	<script src="js/app.view.article.js"></script>
+	<script src="js/app.view.page.js"></script>
+	<script src="js/app.view.header.js"></script>
+
+	<script src="js_prod/app.base.cordova.js"></script>
+	
+	</body>
+</html>
